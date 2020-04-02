@@ -59,6 +59,9 @@
 			<result name="success">/account/update/success.jsp</result>
 			<result name="error">/account/update/error.jsp</result> 
 		</action>		
+		<action name="delCookie" class="com.framework.controller.UserAction" method="DelUserCookie">		
+			<result name="success">/account/login/Logout.html</result>
+		</action>	
 	<!-- User Record Operation End -->
 
 	<!-- Shopping Cart Add Begin -->

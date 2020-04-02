@@ -92,6 +92,14 @@ public class UserAction extends ActionSupport implements ServletResponseAware, C
 	 * registerStatus; } public void setRegisterStatus(String registerStatus) {
 	 * this.registerStatus = registerStatus; }
 	 */
+	
+	public String DelUserCookie() {
+		Cookie userid = new Cookie("userid", null);
+		userid.setMaxAge(0);
+		userid.setPath("/");
+		response.addCookie(userid);	
+		return "success";
+	}
 
 	public String Login() {
 		String beanResult = userBean.Auth(userid, pwd);
@@ -101,7 +109,8 @@ public class UserAction extends ActionSupport implements ServletResponseAware, C
 			Cookie userid = new Cookie("userid", currentUserid);
 			userid.setMaxAge(60 * 60 * 24);
 			userid.setPath("/");
-			response.addCookie(userid);			
+			response.addCookie(userid);	
+			//cookiesMap.put("userid", currentUserid);
 		}
 		return beanResult;
 	}

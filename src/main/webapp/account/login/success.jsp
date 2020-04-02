@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ page import="javax.servlet.http.Cookie"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -57,8 +58,7 @@
 						<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-				<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
-				</li>
+				<li class="nav-item"><a class="nav-link" href="/account/delCookie" action="delCookie">Logout</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="dropdown04"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -71,27 +71,38 @@
 
 		</div>
 	</nav>
+	<% 
+		Cookie[] cookies = request.getCookies();
+		String result = null;
+		for (Cookie cookie : cookies) {
+			System.out.println("cookie: "+cookie.getName()+"="+cookie.getValue());
+			if (cookie.getName().equals("userid")) {
+				result = cookie.getValue();
+				break;
+			}
+		}
 
+	%>
 
 	<main role="main">
 		<div class="jumbotron">
 			<div class="col-sm-8 mx-auto">
 				<h1>
 					WELCOME - This is control Panel
-					<s:property value="userid"/>
+					<s:property value="userid" />
 				</h1>
-				<p>
-					This example is a quick exercise to illustrate how the navbar and
-					its contents work. 
-				</p>
+				<p>This example is a quick exercise to illustrate how the navbar
+					and its contents work.</p>
 				<p>At the smallest breakpoint, the collapse plugin is used to
 					hide the links and show a menu button to toggle the collapsed
 					content.</p>
 				<p>
-					<a class="btn btn-primary" href="/account/update/Update.html" role="button">Update</a>
+					<a class="btn btn-primary" href="/account/update/Update.html"
+						role="button">Update</a>
 				</p>
 				<p>
-					<a class="btn btn-danger" href="/account/destroy/Destroy.html" role="button">Destroy</a>
+					<a class="btn btn-danger" href="/account/destroy/Destroy.html"
+						role="button">Destroy</a>
 				</p>
 			</div>
 		</div>
